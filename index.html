@@ -44,7 +44,7 @@
   label { font-size: 13px; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
   label .req { color: var(--red); font-size: 15px; line-height: 1; }
   .hint { font-size: 11px; color: var(--mid); margin-top: 1px; }
-  input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], textarea, select { border: 1.5px solid var(--gray); border-radius: 5px; padding: 9px 12px; font-size: 14px; font-family: inherit; color: var(--slate); background: #fafbfc; transition: border-color 0.15s, box-shadow 0.15s; width: 100%; }
+  input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea, select { border: 1.5px solid var(--gray); border-radius: 5px; padding: 9px 12px; font-size: 14px; font-family: inherit; color: var(--slate); background: #fafbfc; transition: border-color 0.15s, box-shadow 0.15s; width: 100%; }
   input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(217,164,65,0.15); background: var(--white); }
   input.invalid, textarea.invalid, select.invalid { border-color: var(--red); }
   textarea { resize: vertical; min-height: 90px; }
@@ -56,8 +56,6 @@
   .choice-item input[type="radio"], .choice-item input[type="checkbox"] { width: 17px; height: 17px; accent-color: var(--navy); flex-shrink: 0; cursor: pointer; margin: 0; padding: 0; border: none; box-shadow: none; }
   .choice-item .choice-label { font-size: 14px; color: var(--slate); line-height: 1.3; }
   .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
-  .conditional-section { display: none; }
-  .conditional-section.visible { display: block; }
   .submit-section { background: var(--white); border-radius: 8px; box-shadow: 0 2px 8px rgba(31,74,110,0.08); overflow: hidden; }
   .cert-bar { background: var(--navy); border-top: 3px solid var(--gold); padding: 14px 24px; color: var(--white); font-size: 13px; font-style: italic; }
   .cert-bar strong { color: var(--gold); font-style: normal; font-size: 14px; letter-spacing: 0.5px; }
@@ -89,8 +87,8 @@
   </div>
 </div>
 <div class="container">
-  <div class="notice"><strong>How It Works:</strong> Complete all sections below and submit. Our commercial development team reviews every submission and will reach out within one business day to schedule a discovery call. Questions? Email <strong>info@solaroptimum.com</strong>.</div>
-  <form id="intake-form" novalidate>
+  <div class="notice"><strong>How It Works:</strong> Complete all sections below and submit. Our commercial development team reviews every submission and will reach out within one business day to schedule a discovery call. Questions? Email <strong>ricardosalinas@solaroptimum.com</strong>.</div>
+  <form id="intake-form" novalidate>    <!-- S1: CONTACT -->
     <div class="section"><div class="section-header"><div class="section-num">1</div><div><div class="section-title">CONTACT INFORMATION</div></div></div><div class="section-body"><div class="field-grid">
       <div class="field field-full"><label>Business / Organization Name <span class="req">*</span></label><input type="text" id="biz_name" required placeholder="Full legal or operating name of the organization"></div>
       <div class="field"><label>Primary Contact Name <span class="req">*</span></label><input type="text" id="contact_name" required placeholder="Full name"></div>
@@ -99,10 +97,12 @@
       <div class="field"><label>Email Address <span class="req">*</span></label><input type="email" id="contact_email" required placeholder="name@organization.com"></div>
       <div class="field field-full"><label>Primary Decision Maker &mdash; Name &amp; Title <span class="req">*</span></label><div class="hint">Who will ultimately approve this project?</div><input type="text" id="decision_maker" required placeholder="e.g. Jane Smith, CEO"></div>
     </div></div></div>
+    <!-- S2: LOCATION -->
     <div class="section"><div class="section-header"><div class="section-num">2</div><div><div class="section-title">PROPERTY / PROJECT LOCATION</div></div></div><div class="section-body"><div class="field-grid single">
       <div class="field"><label>Project Address &mdash; Primary Site <span class="req">*</span></label><input type="text" id="primary_address" required placeholder="Street, City, State, ZIP"></div>
       <div class="field"><label>Main Service Breaker Size <span class="req">*</span></label><div class="hint">Enter the main breaker size (amperage) for the primary site, if known.</div><input type="text" id="breaker_size" required placeholder="e.g. 2,000A, 4,000A, or Unknown"></div>
     </div></div></div>
+    <!-- S3: ADDITIONAL SITES -->
     <div class="section"><div class="section-header"><div class="section-num">3</div><div><div class="section-title">ADDITIONAL SITES <span style="font-size:12px;font-weight:400;opacity:0.7">(if applicable)</span></div></div></div><div class="section-body">
       <div class="section-desc">Only complete this section if you have multiple properties to include.</div>
       <div class="field-grid single">
@@ -110,10 +110,12 @@
         <div class="field"><label>Additional Site 3 &mdash; Address</label><div class="hint">Street, City, State, ZIP (optional)</div><input type="text" id="site3_address" placeholder="Street, City, State, ZIP"></div>
         <div class="field"><label>Additional Sites (4+ or portfolio notes)</label><div class="hint">If you have more than 3 sites, list them here or provide a portfolio summary.</div><textarea id="additional_sites" placeholder="List additional addresses or describe your portfolio..."></textarea></div>
       </div>
-    </div></div>    <div class="section"><div class="section-header"><div class="section-num">4</div><div><div class="section-title">BUILDING / FACILITY DETAILS</div></div></div><div class="section-body"><div class="field-grid single">
+    </div></div>
+    <!-- S4: BUILDING -->
+    <div class="section"><div class="section-header"><div class="section-num">4</div><div><div class="section-title">BUILDING / FACILITY DETAILS</div></div></div><div class="section-body"><div class="field-grid single">
       <div class="field"><label>Building Square Footage &mdash; Primary Site</label><input type="text" id="sq_footage" placeholder="e.g. 85,000 SF"></div>
       <div class="field"><label>Roof Type &mdash; Primary Site</label>
-        <div class="choice-group" id="roof_type_group">
+        <div class="choice-group">
           <label class="choice-item"><input type="radio" name="roof_type" value="Flat TPO"><span class="choice-label">Flat TPO</span></label>
           <label class="choice-item"><input type="radio" name="roof_type" value="PVC"><span class="choice-label">PVC</span></label>
           <label class="choice-item"><input type="radio" name="roof_type" value="Torchdown"><span class="choice-label">Torchdown</span></label>
@@ -123,6 +125,7 @@
         </div>
       </div>
     </div></div></div>
+    <!-- S5: GOALS -->
     <div class="section"><div class="section-header"><div class="section-num">5</div><div><div class="section-title">PROJECT GOALS</div></div></div><div class="section-body"><div class="field-grid single">
       <div class="field"><label>Primary Objective(s) <span class="req">*</span></label><div class="hint">Select all that apply.</div>
         <div class="choice-grid" id="objectives_group">
@@ -137,7 +140,7 @@
       </div>
       <div class="divider"></div>
       <div class="field"><label>Interest In</label><div class="hint">Select all that apply.</div>
-        <div class="choice-row" id="interest_group">
+        <div class="choice-row">
           <label class="choice-item"><input type="checkbox" name="interest" value="Solar PV"><span class="choice-label">Solar PV</span></label>
           <label class="choice-item"><input type="checkbox" name="interest" value="Battery Storage"><span class="choice-label">Battery Storage</span></label>
           <label class="choice-item"><input type="checkbox" name="interest" value="Microgrid Solutions"><span class="choice-label">Microgrid Solutions</span></label>
@@ -146,9 +149,10 @@
         </div>
       </div>
     </div></div></div>
+    <!-- S6: FINANCIAL -->
     <div class="section"><div class="section-header"><div class="section-num">6</div><div><div class="section-title">FINANCIAL / DECISION-MAKING</div></div></div><div class="section-body"><div class="field-grid single">
       <div class="field"><label>Financing Preference</label>
-        <div class="choice-grid" id="financing_group">
+        <div class="choice-grid">
           <label class="choice-item"><input type="radio" name="financing" value="Cash purchase"><span class="choice-label">Cash purchase</span></label>
           <label class="choice-item"><input type="radio" name="financing" value="Capital lease"><span class="choice-label">Capital lease</span></label>
           <label class="choice-item"><input type="radio" name="financing" value="Operating lease"><span class="choice-label">Operating lease</span></label>
@@ -166,19 +170,9 @@
           <label class="choice-item"><input type="radio" name="timeline" value="6+ months"><span class="choice-label">6+ months</span></label>
         </div>
       </div>
-      <div class="divider"></div>
-      <div class="field"><label>Is there a Notice to Proceed (NTP)? <span class="req">*</span></label>
-        <div class="choice-row" id="ntp_group">
-          <label class="choice-item"><input type="radio" name="ntp" value="Yes" id="ntp_yes"><span class="choice-label">Yes</span></label>
-          <label class="choice-item"><input type="radio" name="ntp" value="No" id="ntp_no"><span class="choice-label">No</span></label>
-        </div>
-      </div>
     </div></div></div>
-    <div class="section conditional-section" id="ntp_section"><div class="section-header"><div class="section-num">7</div><div><div class="section-title">NTP DETAILS</div></div></div><div class="section-body"><div class="field-grid">
-      <div class="field"><label>NTP Date <span class="req">*</span></label><div class="hint">Select the date of the Notice to Proceed.</div><input type="date" id="ntp_date"></div>
-      <div class="field"><label>NTP / Contract Issuer <span class="req">*</span></label><div class="hint">Name of the entity issuing the NTP or contract.</div><input type="text" id="ntp_issuer" placeholder="e.g. ABC Property Management LLC"></div>
-    </div></div></div>
-    <div class="section"><div class="section-header"><div class="section-num" id="sec8num">8</div><div><div class="section-title">ADDITIONAL INFORMATION</div></div></div><div class="section-body"><div class="field-grid single">
+    <!-- S7: ADDITIONAL INFO -->
+    <div class="section"><div class="section-header"><div class="section-num">7</div><div><div class="section-title">ADDITIONAL INFORMATION</div></div></div><div class="section-body"><div class="field-grid single">
       <div class="field"><label>Additional project notes or special considerations</label><div class="hint">Anything else we should know about your project, timeline, constraints, or goals?</div><textarea id="additional_notes" placeholder="Share any additional context that would help our team prepare for your discovery call..."></textarea></div>
     </div></div></div>
     <div class="submit-section"><div class="cert-bar"><strong>READY TO SUBMIT?</strong><br>Our commercial development team will review your submission and respond within one business day.</div><div class="submit-body"><button type="submit" class="submit-btn" id="submit-btn">&#9654; &nbsp; SUBMIT INTAKE FORM</button><div id="status-bar"></div></div></div>
@@ -197,18 +191,6 @@ document.querySelectorAll('.choice-item input').forEach(inp => {
     }
     if (this.checked) this.closest('.choice-item').classList.add('selected');
     else this.closest('.choice-item').classList.remove('selected');
-    if (this.name === 'ntp') {
-      var sec = document.getElementById('ntp_section');
-      if (this.value === 'Yes' && this.checked) {
-        sec.classList.add('visible');
-        document.getElementById('ntp_date').setAttribute('required','');
-        document.getElementById('ntp_issuer').setAttribute('required','');
-      } else if (this.value === 'No' && this.checked) {
-        sec.classList.remove('visible');
-        document.getElementById('ntp_date').removeAttribute('required');
-        document.getElementById('ntp_issuer').removeAttribute('required');
-      }
-    }
   });
 });
 
@@ -225,7 +207,6 @@ document.getElementById('intake-form').addEventListener('submit', async function
   var valid = true;
   reqs.forEach(function(el) { if (!el.value.trim()) { el.classList.add('invalid'); valid = false; } else el.classList.remove('invalid'); });
   if (!getRadio('timeline')) { document.getElementById('timeline_group').style.outline = '2px solid var(--red)'; valid = false; }
-  if (!getRadio('ntp'))      { document.getElementById('ntp_group').style.outline = '2px solid var(--red)'; valid = false; }
   if (getChecked('objectives').length === 0) { document.getElementById('objectives_group').style.outline = '2px solid var(--red)'; valid = false; }
 
   if (!valid) {
@@ -246,9 +227,6 @@ document.getElementById('intake-form').addEventListener('submit', async function
   var interests   = getChecked('interest');
   var financing   = getRadio('financing');
   var timeline    = getRadio('timeline');
-  var ntpStatus   = getRadio('ntp');
-  var ntpDate     = g('ntp_date');
-  var ntpIssuer   = g('ntp_issuer');
   var today       = new Date().toISOString().slice(0,10);
 
   var description = '## Commercial Intake — ' + bizName + '\n\n**Submitted:** ' + today + '\n\n---\n\n'
@@ -259,8 +237,7 @@ document.getElementById('intake-form').addEventListener('submit', async function
     + (g('additional_sites') ? '- **Additional Sites:** ' + g('additional_sites') + '\n' : '')
     + '\n### Facility\n- **Square Footage:** ' + (g('sq_footage') || 'Not provided') + '\n- **Roof Type:** ' + (getRadio('roof_type') || 'Not specified') + '\n\n'
     + '### Project Goals\n- **Objectives:** ' + (objectives.join(', ') || 'None selected') + '\n- **Interest In:** ' + (interests.join(', ') || 'Not specified') + '\n\n'
-    + '### Financial\n- **Financing Preference:** ' + (financing || 'Not specified') + '\n- **Decision Timeline:** ' + timeline + '\n- **NTP Status:** ' + ntpStatus + '\n'
-    + (ntpStatus === 'Yes' ? '- **NTP Date:** ' + ntpDate + '\n- **NTP Issuer:** ' + ntpIssuer + '\n' : '')
+    + '### Financial\n- **Financing Preference:** ' + (financing || 'Not specified') + '\n- **Decision Timeline:** ' + timeline + '\n'
     + (g('additional_notes') ? '\n### Notes\n' + g('additional_notes') + '\n' : '');
 
   var priority = timeline === '0–30 days' ? 2 : (timeline === '30–90 days' ? 3 : 4);
@@ -307,7 +284,7 @@ document.getElementById('intake-form').addEventListener('submit', async function
 
   } catch (err) {
     sb.className = 'error';
-    sb.textContent = 'Submission error: ' + err.message + ' — Please try again or email info@solaroptimum.com';
+    sb.textContent = 'Submission error: ' + err.message + ' — Please try again or email ricardosalinas@solaroptimum.com';
     btn.disabled = false; btn.textContent = '▶  SUBMIT INTAKE FORM';
   }
 });
