@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commercial Customer Intake &amp; Pre-Qualification — Energy Optimum</title>
+<style>
+  :root {
+    --navy:  #1F4A6E;
+    --gold:  #D9A441;
+    --cream: #F5F0E8;
+    --slate: #2E3A46;
+    --gray:  #E5E9ED;
+    --mid:   #6B7B8A;
+    --white: #ffffff;
+    --red:   #c0392b;
+    --green: #27ae60;
+    --light: #F3F5F7;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Calibri, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: var(--slate); min-height: 100vh; }
+  .site-header { background: var(--navy); border-bottom: 4px solid var(--gold); padding: 20px 40px; display: flex; align-items: center; gap: 20px; }
+  .site-header .wordmark { font-size: 26px; font-weight: 700; color: var(--white); letter-spacing: 2px; }
+  .site-header .tagline  { font-size: 13px; color: var(--gold); letter-spacing: 1px; margin-top: 2px; }
+  .hero { background: linear-gradient(135deg, #1a3d5c 0%, var(--navy) 60%, #2a5a8a 100%); padding: 48px 40px 40px; text-align: center; border-bottom: 3px solid var(--gold); }
+  .hero h1 { color: var(--white); font-size: 32px; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
+  .hero p  { color: #a8bfcf; font-size: 16px; max-width: 640px; margin: 0 auto 28px; line-height: 1.6; }
+  .kpi-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .kpi { background: rgba(255,255,255,0.08); border: 1px solid rgba(217,164,65,0.4); border-radius: 6px; padding: 12px 24px; min-width: 130px; }
+  .kpi .val { font-size: 20px; font-weight: 700; color: var(--gold); }
+  .kpi .lbl { font-size: 11px; color: #a8bfcf; margin-top: 2px; letter-spacing: 0.5px; }
+  .container { max-width: 880px; margin: 36px auto; padding: 0 20px 24px; }
+  .notice { background: var(--cream); border-left: 5px solid var(--gold); border-radius: 4px; padding: 16px 20px; margin-bottom: 32px; font-size: 14px; color: var(--slate); line-height: 1.6; }
+  .notice strong { color: var(--navy); }
+  .section { background: var(--white); border-radius: 8px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(31,74,110,0.08); overflow: hidden; }
+  .section-header { background: var(--navy); border-top: 3px solid var(--gold); padding: 14px 24px; display: flex; align-items: center; gap: 12px; }
+  .section-num { background: var(--gold); color: var(--navy); font-weight: 700; font-size: 13px; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-title { color: var(--white); font-size: 15px; font-weight: 700; letter-spacing: 0.5px; }
+  .section-body { padding: 24px; }
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .field-grid.single { grid-template-columns: 1fr; }
+  .field-full { grid-column: 1 / -1; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  label { font-size: 13px; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+  label .req { color: var(--red); font-size: 15px; line-height: 1; }
+  .hint { font-size: 11px; color: var(--mid); margin-top: 1px; }
+  input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], textarea, select { border: 1.5px solid var(--gray); border-radius: 5px; padding: 9px 12px; font-size: 14px; font-family: inherit; color: var(--slate); background: #fafbfc; transition: border-color 0.15s, box-shadow 0.15s; width: 100%; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(217,164,65,0.15); background: var(--white); }
+  input.invalid, textarea.invalid, select.invalid { border-color: var(--red); }
+  textarea { resize: vertical; min-height: 90px; }
+  .choice-group { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+  .choice-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+  .choice-item { display: flex; align-items: center; gap: 9px; padding: 9px 14px; border-radius: 5px; background: #fafbfc; border: 1.5px solid var(--gray); cursor: pointer; transition: border-color 0.15s, background 0.15s; flex: 0 0 auto; }
+  .choice-item:hover { border-color: var(--gold); background: #fffdf5; }
+  .choice-item.selected { border-color: var(--navy); background: #eef3f8; }
+  .choice-item input[type="radio"], .choice-item input[type="checkbox"] { width: 17px; height: 17px; accent-color: var(--navy); flex-shrink: 0; cursor: pointer; margin: 0; padding: 0; border: none; box-shadow: none; }
+  .choice-item .choice-label { font-size: 14px; color: var(--slate); line-height: 1.3; }
+  .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+  .conditional-section { display: none; }
+  .conditional-section.visible { display: block; }
+  .submit-section { background: var(--white); border-radius: 8px; box-shadow: 0 2px 8px rgba(31,74,110,0.08); overflow: hidden; }
+  .cert-bar { background: var(--navy); border-top: 3px solid var(--gold); padding: 14px 24px; color: var(--white); font-size: 13px; font-style: italic; }
+  .cert-bar strong { color: var(--gold); font-style: normal; font-size: 14px; letter-spacing: 0.5px; }
+  .submit-body { padding: 24px; }
+  .submit-btn { display: block; width: 100%; background: var(--navy); color: var(--white); border: none; border-radius: 6px; padding: 16px; font-size: 17px; font-weight: 700; font-family: inherit; letter-spacing: 1px; cursor: pointer; transition: background 0.2s, transform 0.1s; margin-top: 8px; border-bottom: 3px solid var(--gold); }
+  .submit-btn:hover { background: #163a56; }
+  .submit-btn:active { transform: scale(0.99); }
+  .submit-btn:disabled { background: #8899aa; border-bottom-color: #6b7b8a; cursor: not-allowed; }
+  #status-bar { display: none; border-radius: 6px; padding: 14px 18px; margin-top: 16px; font-size: 14px; font-weight: 600; line-height: 1.5; }
+  #status-bar.success { background: #e8f8ee; border: 1.5px solid var(--green); color: var(--green); }
+  #status-bar.error   { background: #fdf0ee; border: 1.5px solid var(--red); color: var(--red); }
+  #status-bar.loading { background: #eef3f8; border: 1.5px solid var(--navy); color: var(--navy); }
+  .divider { height: 1px; background: var(--gray); margin: 20px 0; }
+  .section-desc { font-size: 13px; color: var(--mid); margin-bottom: 16px; padding: 10px 14px; background: var(--light); border-radius: 4px; border-left: 3px solid var(--gold); }
+  .site-footer { background: var(--navy); border-top: 3px solid var(--gold); padding: 20px 40px; text-align: center; color: #7a9ab8; font-size: 12px; letter-spacing: 0.3px; }
+  @media (max-width: 640px) { .site-header { padding: 16px 20px; } .hero { padding: 32px 20px 28px; } .hero h1 { font-size: 24px; } .field-grid, .choice-grid { grid-template-columns: 1fr; } .field-full { grid-column: 1; } .container { padding: 0 12px 16px; } .section-body { padding: 16px; } }
+</style>
+</head>
+<body>
+<header class="site-header"><div><div class="wordmark">ENERGY OPTIMUM</div><div class="tagline">Capital &middot; Solar &middot; Infrastructure</div></div></header>
+<div class="hero">
+  <h1>Commercial Customer Intake<br>&amp; Pre-Qualification</h1>
+  <p>Tell us about your project. We'll review your submission and connect you with our commercial solar team within one business day.</p>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">C&amp;I</div><div class="lbl">Commercial &amp; Industrial</div></div>
+    <div class="kpi"><div class="val">EPC</div><div class="lbl">Full Turnkey Delivery</div></div>
+    <div class="kpi"><div class="val">PPA</div><div class="lbl">Financing Available</div></div>
+    <div class="kpi"><div class="val">1 Day</div><div class="lbl">Response Time</div></div>
+  </div>
+</div>
+<div class="container">
+  <div class="notice"><strong>How It Works:</strong> Complete all sections below and submit. Our commercial development team reviews every submission and will reach out within one business day to schedule a discovery call. Questions? Email <strong>info@solaroptimum.com</strong>.</div>
+  <form id="intake-form" novalidate>
+    <div class="section"><div class="section-header"><div class="section-num">1</div><div><div class="section-title">CONTACT INFORMATION</div></div></div><div class="section-body"><div class="field-grid">
+      <div class="field field-full"><label>Business / Organization Name <span class="req">*</span></label><input type="text" id="biz_name" required placeholder="Full legal or operating name of the organization"></div>
+      <div class="field"><label>Primary Contact Name <span class="req">*</span></label><input type="text" id="contact_name" required placeholder="Full name"></div>
+      <div class="field"><label>Title / Role</label><input type="text" id="contact_title" placeholder="e.g. Director of Facilities, CFO"></div>
+      <div class="field"><label>Phone Number <span class="req">*</span></label><input type="tel" id="contact_phone" required placeholder="(xxx) xxx-xxxx"></div>
+      <div class="field"><label>Email Address <span class="req">*</span></label><input type="email" id="contact_email" required placeholder="name@organization.com"></div>
+      <div class="field field-full"><label>Primary Decision Maker &mdash; Name &amp; Title <span class="req">*</span></label><div class="hint">Who will ultimately approve this project?</div><input type="text" id="decision_maker" required placeholder="e.g. Jane Smith, CEO"></div>
+    </div></div></div>
+    <div class="section"><div class="section-header"><div class="section-num">2</div><div><div class="section-title">PROPERTY / PROJECT LOCATION</div></div></div><div class="section-body"><div class="field-grid single">
+      <div class="field"><label>Project Address &mdash; Primary Site <span class="req">*</span></label><input type="text" id="primary_address" required placeholder="Street, City, State, ZIP"></div>
+      <div class="field"><label>Main Service Breaker Size <span class="req">*</span></label><div class="hint">Enter the main breaker size (amperage) for the primary site, if known.</div><input type="text" id="breaker_size" required placeholder="e.g. 2,000A, 4,000A, or Unknown"></div>
+    </div></div></div>
+    <div class="section"><div class="section-header"><div class="section-num">3</div><div><div class="section-title">ADDITIONAL SITES <span style="font-size:12px;font-weight:400;opacity:0.7">(if applicable)</span></div></div></div><div class="section-body">
+      <div class="section-desc">Only complete this section if you have multiple properties to include.</div>
+      <div class="field-grid single">
+        <div class="field"><label>Additional Site 2 &mdash; Address</label><div class="hint">Street, City, State, ZIP (optional)</div><input type="text" id="site2_address" placeholder="Street, City, State, ZIP"></div>
+        <div class="field"><label>Additional Site 3 &mdash; Address</label><div class="hint">Street, City, State, ZIP (optional)</div><input type="text" id="site3_address" placeholder="Street, City, State, ZIP"></div>
+        <div class="field"><label>Additional Sites (4+ or portfolio notes)</label><div class="hint">If you have more than 3 sites, list them here or provide a portfolio summary.</div><textarea id="additional_sites" placeholder="List additional addresses or describe your portfolio..."></textarea></div>
+      </div>
+    </div></div>    <div class="section"><div class="section-header"><div class="section-num">4</div><div><div class="section-title">BUILDING / FACILITY DETAILS</div></div></div><div class="section-body"><div class="field-grid single">
+      <div class="field"><label>Building Square Footage &mdash; Primary Site</label><input type="text" id="sq_footage" placeholder="e.g. 85,000 SF"></div>
+      <div class="field"><label>Roof Type &mdash; Primary Site</label>
+        <div class="choice-group" id="roof_type_group">
+          <label class="choice-item"><input type="radio" name="roof_type" value="Flat TPO"><span class="choice-label">Flat TPO</span></label>
+          <label class="choice-item"><input type="radio" name="roof_type" value="PVC"><span class="choice-label">PVC</span></label>
+          <label class="choice-item"><input type="radio" name="roof_type" value="Torchdown"><span class="choice-label">Torchdown</span></label>
+          <label class="choice-item"><input type="radio" name="roof_type" value="Metal"><span class="choice-label">Metal</span></label>
+          <label class="choice-item"><input type="radio" name="roof_type" value="Tile (not ideal for commercial solar)"><span class="choice-label">Tile <span style="color:var(--mid);font-size:12px">(not ideal for commercial solar)</span></span></label>
+          <label class="choice-item"><input type="radio" name="roof_type" value="Other"><span class="choice-label">Other</span></label>
+        </div>
+      </div>
+    </div></div></div>
+    <div class="section"><div class="section-header"><div class="section-num">5</div><div><div class="section-title">PROJECT GOALS</div></div></div><div class="section-body"><div class="field-grid single">
+      <div class="field"><label>Primary Objective(s) <span class="req">*</span></label><div class="hint">Select all that apply.</div>
+        <div class="choice-grid" id="objectives_group">
+          <label class="choice-item"><input type="checkbox" name="objectives" value="Reduce operating expenses"><span class="choice-label">Reduce operating expenses</span></label>
+          <label class="choice-item"><input type="checkbox" name="objectives" value="Hedge against utility rate increases"><span class="choice-label">Hedge against utility rate increases</span></label>
+          <label class="choice-item"><input type="checkbox" name="objectives" value="Improve energy reliability / battery backup"><span class="choice-label">Improve energy reliability / battery backup</span></label>
+          <label class="choice-item"><input type="checkbox" name="objectives" value="Meet sustainability goals"><span class="choice-label">Meet sustainability goals</span></label>
+          <label class="choice-item"><input type="checkbox" name="objectives" value="ESG / compliance requirements"><span class="choice-label">ESG / compliance requirements</span></label>
+          <label class="choice-item"><input type="checkbox" name="objectives" value="EV charging infrastructure"><span class="choice-label">EV charging infrastructure</span></label>
+          <label class="choice-item"><input type="checkbox" name="objectives" value="Other"><span class="choice-label">Other</span></label>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="field"><label>Interest In</label><div class="hint">Select all that apply.</div>
+        <div class="choice-row" id="interest_group">
+          <label class="choice-item"><input type="checkbox" name="interest" value="Solar PV"><span class="choice-label">Solar PV</span></label>
+          <label class="choice-item"><input type="checkbox" name="interest" value="Battery Storage"><span class="choice-label">Battery Storage</span></label>
+          <label class="choice-item"><input type="checkbox" name="interest" value="Microgrid Solutions"><span class="choice-label">Microgrid Solutions</span></label>
+          <label class="choice-item"><input type="checkbox" name="interest" value="EV Charging"><span class="choice-label">EV Charging</span></label>
+          <label class="choice-item"><input type="checkbox" name="interest" value="Full Energy Audit"><span class="choice-label">Full Energy Audit</span></label>
+        </div>
+      </div>
+    </div></div></div>
+    <div class="section"><div class="section-header"><div class="section-num">6</div><div><div class="section-title">FINANCIAL / DECISION-MAKING</div></div></div><div class="section-body"><div class="field-grid single">
+      <div class="field"><label>Financing Preference</label>
+        <div class="choice-grid" id="financing_group">
+          <label class="choice-item"><input type="radio" name="financing" value="Cash purchase"><span class="choice-label">Cash purchase</span></label>
+          <label class="choice-item"><input type="radio" name="financing" value="Capital lease"><span class="choice-label">Capital lease</span></label>
+          <label class="choice-item"><input type="radio" name="financing" value="Operating lease"><span class="choice-label">Operating lease</span></label>
+          <label class="choice-item"><input type="radio" name="financing" value="PPA (Power Purchase Agreement)"><span class="choice-label">PPA (Power Purchase Agreement)</span></label>
+          <label class="choice-item"><input type="radio" name="financing" value="Loan"><span class="choice-label">Loan</span></label>
+          <label class="choice-item"><input type="radio" name="financing" value="Not sure – want options"><span class="choice-label">Not sure — want options</span></label>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="field"><label>Decision Timeline <span class="req">*</span></label>
+        <div class="choice-row" id="timeline_group">
+          <label class="choice-item"><input type="radio" name="timeline" value="0–30 days"><span class="choice-label">0–30 days</span></label>
+          <label class="choice-item"><input type="radio" name="timeline" value="30–90 days"><span class="choice-label">30–90 days</span></label>
+          <label class="choice-item"><input type="radio" name="timeline" value="3–6 months"><span class="choice-label">3–6 months</span></label>
+          <label class="choice-item"><input type="radio" name="timeline" value="6+ months"><span class="choice-label">6+ months</span></label>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="field"><label>Is there a Notice to Proceed (NTP)? <span class="req">*</span></label>
+        <div class="choice-row" id="ntp_group">
+          <label class="choice-item"><input type="radio" name="ntp" value="Yes" id="ntp_yes"><span class="choice-label">Yes</span></label>
+          <label class="choice-item"><input type="radio" name="ntp" value="No" id="ntp_no"><span class="choice-label">No</span></label>
+        </div>
+      </div>
+    </div></div></div>
+    <div class="section conditional-section" id="ntp_section"><div class="section-header"><div class="section-num">7</div><div><div class="section-title">NTP DETAILS</div></div></div><div class="section-body"><div class="field-grid">
+      <div class="field"><label>NTP Date <span class="req">*</span></label><div class="hint">Select the date of the Notice to Proceed.</div><input type="date" id="ntp_date"></div>
+      <div class="field"><label>NTP / Contract Issuer <span class="req">*</span></label><div class="hint">Name of the entity issuing the NTP or contract.</div><input type="text" id="ntp_issuer" placeholder="e.g. ABC Property Management LLC"></div>
+    </div></div></div>
+    <div class="section"><div class="section-header"><div class="section-num" id="sec8num">8</div><div><div class="section-title">ADDITIONAL INFORMATION</div></div></div><div class="section-body"><div class="field-grid single">
+      <div class="field"><label>Additional project notes or special considerations</label><div class="hint">Anything else we should know about your project, timeline, constraints, or goals?</div><textarea id="additional_notes" placeholder="Share any additional context that would help our team prepare for your discovery call..."></textarea></div>
+    </div></div></div>
+    <div class="submit-section"><div class="cert-bar"><strong>READY TO SUBMIT?</strong><br>Our commercial development team will review your submission and respond within one business day.</div><div class="submit-body"><button type="submit" class="submit-btn" id="submit-btn">&#9654; &nbsp; SUBMIT INTAKE FORM</button><div id="status-bar"></div></div></div>
+  </form>
+</div>
+<footer class="site-footer">ENERGY OPTIMUM &nbsp;&middot;&nbsp; SOLAR OPTIMUM &nbsp;&middot;&nbsp; 1833 Victory Blvd, Glendale CA 91201 &nbsp;&middot;&nbsp; SolarOptimum.com</footer>
+<script>
+const CLICKUP_TOKEN = 'pk_284686144_BEUPGXZNG0FV1FUR71TYMHU2YE39I05F';
+const SPACE_ID = '901810230011';
+const LIST_ID  = '901816748523';
+
+document.querySelectorAll('.choice-item input').forEach(inp => {
+  inp.addEventListener('change', function() {
+    if (this.type === 'radio') {
+      document.querySelectorAll('input[name="' + this.name + '"]').forEach(r => r.closest('.choice-item').classList.remove('selected'));
+    }
+    if (this.checked) this.closest('.choice-item').classList.add('selected');
+    else this.closest('.choice-item').classList.remove('selected');
+    if (this.name === 'ntp') {
+      var sec = document.getElementById('ntp_section');
+      if (this.value === 'Yes' && this.checked) {
+        sec.classList.add('visible');
+        document.getElementById('ntp_date').setAttribute('required','');
+        document.getElementById('ntp_issuer').setAttribute('required','');
+      } else if (this.value === 'No' && this.checked) {
+        sec.classList.remove('visible');
+        document.getElementById('ntp_date').removeAttribute('required');
+        document.getElementById('ntp_issuer').removeAttribute('required');
+      }
+    }
+  });
+});
+
+function g(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function getChecked(name) { return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(el => el.value); }
+function getRadio(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
+
+document.getElementById('intake-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submit-btn');
+  var sb  = document.getElementById('status-bar');
+
+  var reqs = document.querySelectorAll('[required]');
+  var valid = true;
+  reqs.forEach(function(el) { if (!el.value.trim()) { el.classList.add('invalid'); valid = false; } else el.classList.remove('invalid'); });
+  if (!getRadio('timeline')) { document.getElementById('timeline_group').style.outline = '2px solid var(--red)'; valid = false; }
+  if (!getRadio('ntp'))      { document.getElementById('ntp_group').style.outline = '2px solid var(--red)'; valid = false; }
+  if (getChecked('objectives').length === 0) { document.getElementById('objectives_group').style.outline = '2px solid var(--red)'; valid = false; }
+
+  if (!valid) {
+    sb.className = 'error'; sb.style.display = 'block';
+    sb.textContent = 'Please complete all required fields before submitting.';
+    (document.querySelector('.invalid') || document.querySelector('[style*="red"]')).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  var bizName     = g('biz_name');
+  var contactName = g('contact_name');
+  var phone       = g('contact_phone');
+  var email       = g('contact_email');
+  var decMaker    = g('decision_maker');
+  var primaryAddr = g('primary_address');
+  var breakerSize = g('breaker_size');
+  var objectives  = getChecked('objectives');
+  var interests   = getChecked('interest');
+  var financing   = getRadio('financing');
+  var timeline    = getRadio('timeline');
+  var ntpStatus   = getRadio('ntp');
+  var ntpDate     = g('ntp_date');
+  var ntpIssuer   = g('ntp_issuer');
+  var today       = new Date().toISOString().slice(0,10);
+
+  var description = '## Commercial Intake — ' + bizName + '\n\n**Submitted:** ' + today + '\n\n---\n\n'
+    + '### Contact\n- **Organization:** ' + bizName + '\n- **Contact:** ' + contactName + (g('contact_title') ? ', ' + g('contact_title') : '') + '\n- **Phone:** ' + phone + '\n- **Email:** ' + email + '\n- **Decision Maker:** ' + decMaker + '\n\n'
+    + '### Location\n- **Primary Site:** ' + primaryAddr + '\n- **Main Breaker:** ' + breakerSize + '\n'
+    + (g('site2_address') ? '- **Site 2:** ' + g('site2_address') + '\n' : '')
+    + (g('site3_address') ? '- **Site 3:** ' + g('site3_address') + '\n' : '')
+    + (g('additional_sites') ? '- **Additional Sites:** ' + g('additional_sites') + '\n' : '')
+    + '\n### Facility\n- **Square Footage:** ' + (g('sq_footage') || 'Not provided') + '\n- **Roof Type:** ' + (getRadio('roof_type') || 'Not specified') + '\n\n'
+    + '### Project Goals\n- **Objectives:** ' + (objectives.join(', ') || 'None selected') + '\n- **Interest In:** ' + (interests.join(', ') || 'Not specified') + '\n\n'
+    + '### Financial\n- **Financing Preference:** ' + (financing || 'Not specified') + '\n- **Decision Timeline:** ' + timeline + '\n- **NTP Status:** ' + ntpStatus + '\n'
+    + (ntpStatus === 'Yes' ? '- **NTP Date:** ' + ntpDate + '\n- **NTP Issuer:** ' + ntpIssuer + '\n' : '')
+    + (g('additional_notes') ? '\n### Notes\n' + g('additional_notes') + '\n' : '');
+
+  var priority = timeline === '0–30 days' ? 2 : (timeline === '30–90 days' ? 3 : 4);
+
+  btn.disabled = true; btn.textContent = 'Submitting...';
+  sb.className = 'loading'; sb.style.display = 'block';
+  sb.textContent = 'Step 1 of 3 — Creating lead record...';
+
+  try {
+    var taskRes = await fetch('https://api.clickup.com/api/v2/list/' + LIST_ID + '/task', {
+      method: 'POST', headers: { 'Authorization': CLICKUP_TOKEN, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: bizName + ' — Commercial Intake', markdown_description: description, status: 'Open', priority: priority })
+    });
+    var taskData = await taskRes.json();
+    if (!taskRes.ok || !taskData.id) throw new Error(taskData.err || 'Task creation failed');
+
+    sb.textContent = 'Step 2 of 3 — Creating client folder...';
+    var folderRes = await fetch('https://api.clickup.com/api/v2/space/' + SPACE_ID + '/folder', {
+      method: 'POST', headers: { 'Authorization': CLICKUP_TOKEN, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: '🏢 ' + bizName })
+    });
+    var folderData = await folderRes.json();
+
+    if (folderData.id) {
+      sb.textContent = 'Step 3 of 3 — Setting up client workspace...';
+      var listRes = await fetch('https://api.clickup.com/api/v2/folder/' + folderData.id + '/list', {
+        method: 'POST', headers: { 'Authorization': CLICKUP_TOKEN, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: 'Deal Details', content: 'Submitted ' + today + ' | ' + contactName + ' | ' + email })
+      });
+      var listData = await listRes.json();
+      if (listData.id) {
+        await fetch('https://api.clickup.com/api/v2/list/' + listData.id + '/task', {
+          method: 'POST', headers: { 'Authorization': CLICKUP_TOKEN, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: bizName + ' — Commercial Intake', markdown_description: description, status: 'Open' })
+        });
+      }
+    }
+
+    sb.className = 'success';
+    sb.innerHTML = '<strong>Submission received!</strong><br>Thank you, <strong>' + bizName + '</strong>. Our commercial development team will review your project and reach out within one business day.';
+    btn.textContent = 'Submitted ✓'; btn.style.background = 'var(--green)'; btn.style.borderBottomColor = '#1e8449';
+    document.getElementById('intake-form').style.pointerEvents = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    sb.className = 'error';
+    sb.textContent = 'Submission error: ' + err.message + ' — Please try again or email info@solaroptimum.com';
+    btn.disabled = false; btn.textContent = '▶  SUBMIT INTAKE FORM';
+  }
+});
+</script>
+</body>
+</html>
