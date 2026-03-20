@@ -210,7 +210,7 @@ document.getElementById('intake-form').addEventListener('submit', async function
   sb.className='loading'; sb.style.display='block'; sb.textContent='Step 1 of 3 — Creating lead record...';
 
   try {
-    var tRes=await fetch('https://api.clickup.com/api/v2/list/'+LIST_ID+'/task',{method:'POST',headers:{'Authorization':CLICKUP_TOKEN,'Content-Type':'application/json'},body:JSON.stringify({name:bizName+' — Commercial Intake',markdown_description:description,status:'Open',priority:priority})});
+    var tRes=await fetch('https://api.clickup.com/api/v2/list/'+LIST_ID+'/task',{method:'POST',headers:{'Authorization':CLICKUP_TOKEN,'Content-Type':'application/json'},body:JSON.stringify({name:bizName+' — Commercial Intake',markdown_description:description,status:'to do',priority:priority})});
     var tData=await tRes.json();
     if(!tRes.ok||!tData.id) throw new Error(tData.err||'Task creation failed');
 
@@ -222,7 +222,7 @@ document.getElementById('intake-form').addEventListener('submit', async function
       sb.textContent='Step 3 of 3 — Setting up client workspace...';
       var lRes=await fetch('https://api.clickup.com/api/v2/folder/'+fData.id+'/list',{method:'POST',headers:{'Authorization':CLICKUP_TOKEN,'Content-Type':'application/json'},body:JSON.stringify({name:'Deal Details',content:'Submitted '+today+' | '+contactName+' | '+email})});
       var lData=await lRes.json();
-      if(lData.id) await fetch('https://api.clickup.com/api/v2/list/'+lData.id+'/task',{method:'POST',headers:{'Authorization':CLICKUP_TOKEN,'Content-Type':'application/json'},body:JSON.stringify({name:bizName+' — Commercial Intake',markdown_description:description,status:'Open'})});
+      if(lData.id) await fetch('https://api.clickup.com/api/v2/list/'+lData.id+'/task',{method:'POST',headers:{'Authorization':CLICKUP_TOKEN,'Content-Type':'application/json'},body:JSON.stringify({name:bizName+' — Commercial Intake',markdown_description:description,status:'to do'})});
     }
 
     sb.className='success';
